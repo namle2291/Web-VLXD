@@ -14,4 +14,12 @@ class Controller extends BaseController
     function customValidate($data, $rules, $messages){
         return Validator::make($data,$rules,[],$messages)->validate();
     }
+
+    function uploadFile($file, $folder){
+        if($file){
+            $filename = $file->hashName();
+            $file->storeAs('/public/'. $folder, $filename);
+            return $filename;
+        }
+    }
 }

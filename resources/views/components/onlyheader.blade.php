@@ -5,13 +5,13 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Web VLXD</title>
+    <title>{{ $attributes['title'] }}</title>
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
     <!-- MDB -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css" rel="stylesheet" />
     <!-- Style -->
-    <link rel="stylesheet" href="{{asset('/assets/home/style.css')}}" />
+    <link rel="stylesheet" href="{{ asset('/assets/home/style.css') }}" />
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <!-- Slick Slider -->
@@ -35,12 +35,13 @@
             min-height: 400px;
         }
     </style>
+    @yield('style')
 </head>
 
 <body>
     <button class="btn_go_to_top">
-        <img src="https://www.freeiconspng.com/thumbs/up-arrow-png/black-up-arrow-png-22.png" width="25" height="25"
-            alt="" />
+        <img src="https://www.freeiconspng.com/thumbs/up-arrow-png/black-up-arrow-png-22.png" width="25"
+            height="25" alt="" />
     </button>
     <div class="top d-none d-md-block">
         <div class="container">
@@ -78,32 +79,16 @@
                 </div>
                 <div class="col-xl-5 d-none d-xl-block">
                     <div class="search">
-                        <form class="search_form" action="{{route('trangchu.timkiem')}}" method="get">
-                            <input type="text" name="key" class="search_input" placeholder="Tìm kiếm sản phẩm..." />
+                        <form class="search_form" action="{{ route('trangchu.timkiem') }}" method="get">
+                            <input type="text" name="key" class="search_input"
+                                placeholder="Tìm kiếm sản phẩm..." />
                             <button class="search_btn">Tìm kiếm</button>
                         </form>
                     </div>
                 </div>
                 <div class="col-xl-4 col-8">
-                    <div class="account">
-                        <ul class="account_list">
-                            <li class="account_item">
-                                <a class="account_link" href="{{route('khachhang.dangnhap')}}"><i
-                                        class="fa-solid fa-circle-user"></i> Đăng nhập</a>
-                            </li>
-                            <li class="account_item">
-                                <i class="fa-solid fa-grip-lines-vertical"></i>
-                            </li>
-                            <li class="account_item">
-                                <a class="account_link" href="{{route('khachhang.dangky')}}">Đăng ký</a>
-                            </li>
-                            <li class="account_item">
-                                <a class="account_link" href="{{route('trangchu.giohang')}}"><i
-                                        class="fas fa-bag-shopping"></i>
-                                    <sup>[{{$cart->get_total_quantity()}}]</sup></a>
-                            </li>
-                        </ul>
-                    </div>
+                    {{-- Account --}}
+                    <x-account />
                 </div>
             </div>
         </div>
@@ -112,9 +97,9 @@
     <nav>
         <div class="container">
             {{-- Nav bar --}}
-            <x-navbar />
-            <div class="row mt-3">
-                {{$slot}}
+            <x-navbar :hide-category="true" />
+            <div class="mt-3">
+                {{ $slot }}
             </div>
         </div>
     </nav>
@@ -217,11 +202,12 @@
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
     </script>
     <!-- Slick Slider -->
-    <script src="https://code.jquery.com/jquery-3.6.4.js"
-        integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E="
+        crossorigin="anonymous"></script>
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <!-- Index Js -->
-    <script src="{{asset('/assets/home/index.js')}}"></script>
+    <script src="{{ asset('/assets/home/index.js') }}"></script>
+    @yield('script')
 </body>
 
 </html>

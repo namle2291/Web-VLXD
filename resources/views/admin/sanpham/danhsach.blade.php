@@ -14,19 +14,22 @@
                 </thead>
                 <tbody>
                     @foreach ($sanpham as $item)
-                    <tr>
-                        <td>{{$item->id}}</td>
-                        <td>{{$item->tensanpham}}</td>
-                        <td>
-                            <img src="{{asset('/storage/sanpham/'.$item->hinhanh)}}" width="100" height="100" alt="">
-                        </td>
-                        <td>{{number_format($item->gia)}}</td>
-                        <td>{{$item->danhmuc->tendanhmuc}}</td>
-                        <td>
-                            <a class="btn btn-sm btn-warning" href="">Sửa</a>
-                            <a class="btn btn-sm btn-danger" href="{{route('admin.sanpham.xoa',$item->id)}}">Xóa</a>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td>{{ $item->id }}</td>
+                            <td>{{ $item->tensanpham }}</td>
+                            <td>
+                                <img src="{{ asset('/storage/sanpham/' . $item->hinhanh) }}" width="100" class="img-thumbnail" height="100"
+                                    alt="">
+                            </td>
+                            <td>{{ $cart->format_price($item->gia) }}</td>
+                            <td>{{ $item->danhmuc->tendanhmuc }}</td>
+                            <td>
+                                <a class="btn btn-sm btn-warning"
+                                    href="{{ route('admin.sanpham.them', $item->id) }}">Sửa</a>
+                                <a class="btn btn-sm btn-danger"
+                                    href="{{ route('admin.sanpham.xoa', $item->id) }}">Xóa</a>
+                            </td>
+                        </tr>
                     @endforeach
                 </tbody>
             </table>

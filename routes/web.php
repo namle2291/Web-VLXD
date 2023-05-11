@@ -10,12 +10,17 @@ Route::prefix('/')->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('trangchu');
     Route::get('/san-pham', [HomeController::class, 'product'])->name('trangchu.sanpham');
     Route::get('/gio-hang', [HomeController::class, 'cart'])->name('trangchu.giohang');
-    Route::get('/thanh-toan', [HomeController::class, 'checkout'])->name('trangchu.thanhtoan');
+    Route::get('/thanh-toan', [HomeController::class, 'checkout'])->name('trangchu.thanhtoan')->middleware('khachhang');
+    Route::post('/thanh-toan', [HomeController::class, 'store_checkout'])->name('trangchu.luu_thanhtoan');
 
     Route::get('/tim-kiem', [HomeController::class, 'search'])->name('trangchu.timkiem');
     Route::get('/danh-muc/{id?}', [HomeController::class, 'product_category'])->name('trangchu.danhmucsp');
-    Route::get('/tin-tuc', [HomeController::class, 'news'])->name('trangchu.tintuc');
     Route::get('/lien-he', [HomeController::class, 'contact'])->name('trangchu.lienhe');
+    Route::post('/lien-he', [HomeController::class, 'store_contact'])->name('trangchu.luu_lienhe');
+    Route::get('/tin-tuc', [HomeController::class, 'news'])->name('trangchu.tintuc');
+    Route::get('/chi-tiet-tin-tuc/{id?}', [HomeController::class, 'new_detail'])->name('trangchu.tintuc.chitiet');
+    Route::get('/chi-tiet-sp/{id?}',[HomeController::class, 'product_detail'])->name('trangchu.chitietsanpham');
+
     include('client/khachhang.php');
     include('client/giohang.php');
 });
@@ -37,4 +42,6 @@ Route::prefix('admin')->group(function () {
     include('admin/sanpham.php');
     // Banner
     include('admin/banner.php');
+    // Tin tức
+    include('admin/tintuc.php');
 });

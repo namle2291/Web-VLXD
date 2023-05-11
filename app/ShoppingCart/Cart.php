@@ -13,7 +13,6 @@ class Cart
         $this->total_price = $this->get_total_price();
         $this->total_price = $this->get_total_quantity();
     }
-
     public function add($product, $quantity = 1)
     {
 
@@ -63,5 +62,9 @@ class Cart
     public function get_total_quantity()
     {
         return count($this->items);
+    }
+    
+    public function format_price($number){
+        return number_format($number, 0, ',', '.') . "đ";
     }
 }

@@ -96,7 +96,7 @@
                         </div>
 
                         <div class="col-lg-6 mb-5 mb-lg-0">
-                            <img src="https://e1.pxfuel.com/desktop-wallpaper/507/61/desktop-wallpaper-best-10-construction-hq-bangkok-high-building.jpg"
+                            <img src="https://images.unsplash.com/photo-1615461476249-718ef8bc369c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"
                                 class="w-100 rounded-4 shadow-4" alt="" />
                         </div>
                     </div>

@@ -8,7 +8,8 @@ use Illuminate\Http\Request;
 
 class SanPhamController extends Controller
 {
-    public function __construct() {
+    public function __construct()
+    {
         $this->middleware('auth');
     }
     function index()
@@ -16,12 +17,16 @@ class SanPhamController extends Controller
         $sanpham = SanPham::orderByDesc('id')->get();
         return view('admin.sanpham.danhsach', compact('sanpham'));
     }
-    function create()
+    function createOrUpdate($id = null)
     {
+        $sanpham_edit = null;
+        if ($id) {
+            $sanpham_edit = SanPham::findOrFail($id);
+        }
         $danhmuc = DanhMuc::all();
-        return view('admin.sanpham.them', compact('danhmuc'));
+        return view('admin.sanpham.them', compact('danhmuc', 'sanpham_edit'));
     }
-    function store(Request $request)
+    function store(Request $request, $id = null)
     {
         $data = $request->all();
         unset($data['_token']);
@@ -39,7 +44,7 @@ class SanPhamController extends Controller
             'danhmuc_id' => 'Danh mục',
         ];
 
-        $this->customValidate($data,$rules,$messages);
+        $this->customValidate($data, $rules, $messages);
 
 
         if ($request->hasFile('hinhanh')) {
@@ -49,11 +54,13 @@ class SanPhamController extends Controller
             $data['hinhanh'] = $filename;
         }
 
-        SanPham::updateOrCreate($data);
+        $sanpham = SanPham::updateOrCreate(['id' => $id], $data);
+        $sanpham->save();
 
         return back();
     }
-    function destroy($id){
+    function destroy($id)
+    {
         SanPham::destroy($id);
         return back();
     }

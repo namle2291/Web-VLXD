@@ -5,13 +5,13 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Web VLXD</title>
+    <title>Web Vật Liệu Xây Dựng</title>
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
     <!-- MDB -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css" rel="stylesheet" />
     <!-- Style -->
-    <link rel="stylesheet" href="{{asset('/assets/home/style.css')}}" />
+    <link rel="stylesheet" href="{{ asset('/assets/home/style.css') }}" />
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <!-- Slick Slider -->
@@ -39,8 +39,8 @@
 
 <body>
     <button class="btn_go_to_top">
-        <img src="https://www.freeiconspng.com/thumbs/up-arrow-png/black-up-arrow-png-22.png" width="25" height="25"
-            alt="" />
+        <img src="https://www.freeiconspng.com/thumbs/up-arrow-png/black-up-arrow-png-22.png" width="25"
+            height="25" alt="" />
     </button>
     <div class="top d-none d-md-block">
         <div class="container">
@@ -78,47 +78,16 @@
                 </div>
                 <div class="col-xl-5 d-none d-xl-block">
                     <div class="search">
-                        <form class="search_form" action="{{route('trangchu.timkiem')}}" method="get">
-                            <input type="text" name="key" class="search_input" placeholder="Tìm kiếm sản phẩm..." />
+                        <form class="search_form" action="{{ route('trangchu.timkiem') }}" method="get">
+                            <input type="text" name="key" class="search_input"
+                                placeholder="Tìm kiếm sản phẩm..." />
                             <button class="search_btn">Tìm kiếm</button>
                         </form>
                     </div>
                 </div>
                 <div class="col-xl-4 col-8">
-                    <div class="account">
-                        <ul class="account_list">
-                            @if(Auth::guard('khachhang')->user())
-                            <li class="account_item">
-                                <a class="account_link" href=""><i class="fa-solid fa-circle-user"></i>
-                                    {{Auth::guard('khachhang')->user()->ten}}</a>
-                            </li>
-                            <li class="account_item">
-                                <i class="fa-solid fa-grip-lines-vertical"></i>
-                            </li>
-                            <li class="account_item">
-                                <a class="account_link" href="{{route('khachhang.dangxuat')}}"><i
-                                        class="fas fa-sign-out-alt"></i>
-                                    Thoát</a>
-                            </li>
-                            @else
-                            <li class="account_item">
-                                <a class="account_link" href="{{route('khachhang.dangnhap')}}"><i
-                                        class="fa-solid fa-circle-user"></i> Đăng nhập</a>
-                            </li>
-                            <li class="account_item">
-                                <i class="fa-solid fa-grip-lines-vertical"></i>
-                            </li>
-                            <li class="account_item">
-                                <a class="account_link" href="{{route('khachhang.dangky')}}">Đăng ký</a>
-                            </li>
-                            @endif
-                            <li class="account_item">
-                                <a class="account_link" href="{{route('trangchu.giohang')}}"><i
-                                        class="fas fa-bag-shopping"></i>
-                                    <sup>[{{$cart->get_total_quantity()}}]</sup></a>
-                            </li>
-                        </ul>
-                    </div>
+                    {{-- Account --}}
+                    <x-account />
                 </div>
             </div>
         </div>
@@ -126,7 +95,7 @@
     <nav>
         <div class="container">
             {{-- Nav bar --}}
-            <x-navbar/>
+            <x-navbar />
             <div class="row mt-3">
                 <div class="col-lg-3 d-none d-lg-block">
                     <x-danhmuc />
@@ -142,7 +111,7 @@
         <div class="container">
             <h4 class="text-center">Sản phẩm mới nhất</h4>
             <div class="row">
-                {{$slot}}
+                {{ $slot }}
             </div>
         </div>
     </section>
@@ -168,62 +137,40 @@
                 </button>
             </div>
             <div class="post_list">
-                <div class="post_item">
-                    <div class="row py-4">
-                        <div class="col-md-7 col-12 mb-3">
-                            <div class="post_image">
-                                <img src="https://bizweb.dktcdn.net/100/481/386/articles/tintuc7-30fd07db-053b-46b5-b622-3f1282821399.png?v=1679909067317"
-                                    class="w-100" alt="" />
+                @if (count($tintuc) > 0)
+                    @foreach ($tintuc as $item)
+                        <div class="post_item">
+                            <div class="row py-4">
+                                <div class="col-md-7 col-12 mb-3">
+                                    <div class="post_image">
+                                        <img src="{{ asset('/storage/tintuc/' . $item->hinhanh) }}" class="w-100"
+                                            alt="" />
+                                    </div>
+                                </div>
+                                <div class="col-md-5 col-sm-12 d-flex align-items-center">
+                                    <div class="post_info" style="text-align: justify">
+                                        <a class="post_title text-dark"
+                                            href="{{ route('trangchu.tintuc.chitiet', $item->id) }}">
+                                            <h5>
+                                                {{ $item->tieude }}
+                                            </h5>
+                                        </a>
+                                        <p class="post_desc text-secondary">
+                                            {{ $item->mota }}
+                                        </p>
+                                        <a href="{{ route('trangchu.tintuc.chitiet', $item->id) }}"
+                                            style="background-color: var(--main_color)"
+                                            class="post_btn_detail btn btn-sm text-light">
+                                            Xem thêm
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-5 col-sm-12 d-flex align-items-center">
-                            <div class="post_info" style="text-align: justify">
-                                <a class="post_title text-dark" href="">
-                                    <h5>
-                                        MẪU GẠCH ỐP MẶT TIỀN NHÀ ỐNG ĐẸP, SANG TRỌNG ĐƯỢC ƯA
-                                        CHUỘNG NĂM 2022
-                                    </h5>
-                                </a>
-                                <p class="post_desc text-secondary">
-                                    Thị trường gạch ốp lát ngày càng phong phú, với sự đa dạng
-                                    về mẫu mã, kiểu dáng, kích thước...
-                                </p>
-                                <button style="background-color: var(--main_color)"
-                                    class="post_btn_detail btn btn-sm text-light">
-                                    Xem thêm
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="post_item">
-                    <div class="row py-4">
-                        <div class="col-md-7 col-12 mb-3">
-                            <div class="post_image">
-                                <img src="https://bizweb.dktcdn.net/100/481/386/articles/tintuc7-30fd07db-053b-46b5-b622-3f1282821399.png?v=1679909067317"
-                                    class="w-100" alt="" />
-                            </div>
-                        </div>
-                        <div class="col-md-5 col-sm-12 d-flex align-items-center">
-                            <div class="post_info" style="text-align: justify">
-                                <a class="post_title text-dark" href="">
-                                    <h5>CÓ NÊN SỬ DỤNG GẠCH BÔNG GIÓ KHI XÂY NHÀ?</h5>
-                                </a>
-                                <p class="post_desc text-secondary">
-                                    Trong thiết kế, thi công nội thất, đối với những ngôi nhà
-                                    nhiều tầng, có diện tích nhỏ và nằm san sát nhau, bên cạnh
-                                    sử dụng giếng trời, có thể sử dụng các loại gạch thẻ, gạch
-                                    kính hay gạch bông gió để lấy sáng, giúp căn nhà luôn mát
-                                    mẻ, thông thoáng.
-                                </p>
-                                <button style="background-color: var(--main_color)"
-                                    class="post_btn_detail btn btn-sm text-light">
-                                    Xem thêm
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    @endforeach
+                @else
+                    <p class="text-center">Đang cập nhật...</p>
+                @endif
             </div>
         </div>
     </section>
@@ -344,11 +291,11 @@
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
     </script>
     <!-- Slick Slider -->
-    <script src="https://code.jquery.com/jquery-3.6.4.js"
-        integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E="
+        crossorigin="anonymous"></script>
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <!-- Index Js -->
-    <script src="{{asset('/assets/home/index.js')}}"></script>
+    <script src="{{ asset('/assets/home/index.js') }}"></script>
 </body>
 
 </html>

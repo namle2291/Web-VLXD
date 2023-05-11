@@ -9,10 +9,10 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>{{$attributes['title']}}</title>
+    <title>{{ $attributes['title'] }}</title>
 
     <!-- Custom fonts for this template-->
-    <link href="{{asset('/assets/admin/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('/assets/admin/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
@@ -25,8 +25,9 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css" rel="stylesheet" />
 
     <!-- Custom styles for this template-->
-    <link href="{{asset('/assets/admin/css/sb-admin-2.css')}}" rel="stylesheet">
-
+    <link href="{{ asset('/assets/admin/css/sb-admin-2.css') }}" rel="stylesheet">
+    {{-- CkEditor --}}
+    <script src="https://cdn.ckeditor.com/4.21.0/standard/ckeditor.js"></script>
 </head>
 
 <body id="page-top">
@@ -50,7 +51,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="{{route('dashboard')}}">
+                <a class="nav-link" href="{{ route('dashboard') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -67,7 +68,7 @@
                 </a>
                 <div id="danhmuc" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{route('admin.danhmuc')}}">Danh sách</a>
+                        <a class="collapse-item" href="{{ route('admin.danhmuc') }}">Danh sách</a>
                     </div>
                 </div>
             </li>
@@ -79,20 +80,33 @@
                 </a>
                 <div id="sanpham" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{route('admin.sanpham.them')}}">Thêm</a>
-                        <a class="collapse-item" href="{{route('admin.sanpham')}}">Danh sách</a>
+                        <a class="collapse-item" href="{{ route('admin.sanpham.them') }}">Thêm</a>
+                        <a class="collapse-item" href="{{ route('admin.sanpham') }}">Danh sách</a>
                     </div>
                 </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#banner" aria-expanded="true"
-                    aria-controls="banner">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#banner"
+                    aria-expanded="true" aria-controls="banner">
                     <i class="fas fa-image"></i>
                     <span>Banner</span>
                 </a>
                 <div id="banner" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{route('admin.banner')}}">Danh sách</a>
+                        <a class="collapse-item" href="{{ route('admin.banner') }}">Danh sách</a>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#tintuc"
+                    aria-expanded="true" aria-controls="tintuc">
+                    <i class="fas fa-earth"></i>
+                    <span>Tin tức</span>
+                </a>
+                <div id="tintuc" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="{{ route('admin.tintuc.them') }}">Thêm</a>
+                        <a class="collapse-item" href="{{ route('admin.tintuc') }}">Danh sách</a>
                     </div>
                 </div>
             </li>
@@ -117,8 +131,8 @@
                     <form
                         class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Tìm kiếm..."
-                                aria-label="Search" aria-describedby="basic-addon2">
+                            <input type="text" class="form-control bg-light border-0 small"
+                                placeholder="Tìm kiếm..." aria-label="Search" aria-describedby="basic-addon2">
                             <div class="input-group-append">
                                 <button class="btn btn-primary" type="button">
                                     <i class="fas fa-search fa-sm"></i>
@@ -160,19 +174,21 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{Auth::user()->name ??
-                                    ''}}</span>
-                                <img class="img-profile rounded-circle" src="{{asset('assets/images/default.png')}}">
+                                <span
+                                    class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name ?? '' }}</span>
+                                <img class="img-profile rounded-circle"
+                                    src="{{ asset('assets/images/default.png') }}">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="{{route('admin.info')}}">
+                                <a class="dropdown-item" href="{{ route('admin.info') }}">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Thông tin
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                <a class="dropdown-item" href="#" data-toggle="modal"
+                                    data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Đăng xuất
                                 </a>
@@ -186,7 +202,7 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-                    {{$slot}}
+                    {{ $slot }}
                 </div>
                 <!-- /.container-fluid -->
 
@@ -228,22 +244,24 @@
                 <div class="modal-body">Chọn "Đăng xuất" bên dưới để thoát..</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Hủy bỏ</button>
-                    <a class="btn btn-primary" href="{{route('admin.logout')}}">Đăng xuất</a>
+                    <a class="btn btn-primary" href="{{ route('admin.logout') }}">Đăng xuất</a>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="{{asset('/assets/admin/vendor/jquery/jquery.min.js')}}"></script>
-    <script src="{{asset('/assets/admin/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{ asset('/assets/admin/vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('/assets/admin/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="{{asset('/assets/admin/vendor/jquery-easing/jquery.easing.min.js')}}"></script>
+    <script src="{{ asset('/assets/admin/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="{{asset('/assets/admin/js/sb-admin-2.min.js')}}"></script>
-
+    <script src="{{ asset('/assets/admin/js/sb-admin-2.min.js') }}"></script>
+    <script>
+        CKEDITOR.replace('editor1');
+    </script>
 </body>
 
 </html>

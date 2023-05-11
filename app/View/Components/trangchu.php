@@ -3,6 +3,7 @@
 namespace App\View\Components;
 
 use App\Models\SanPham;
+use App\Models\TinTuc;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
@@ -22,6 +23,7 @@ class trangchu extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.trangchu');
+        $tintuc = TinTuc::all()->take(10);
+        return view('components.trangchu',compact('tintuc'));
     }
 }
