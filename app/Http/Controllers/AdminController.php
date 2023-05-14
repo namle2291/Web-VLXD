@@ -15,8 +15,8 @@ class AdminController extends Controller
     }
     function login()
     {
-        if(Auth::user()){
-            return redirect(route('dashboard')); 
+        if (Auth::user()) {
+            return redirect(route('dashboard'));
         }
         return view('admin.login');
     }
@@ -32,8 +32,8 @@ class AdminController extends Controller
         $rules = [
             'name' => 'min:3|string',
             'email' => 'email',
-            'password' => 'min:6',
-            'confirm_password' => 'min:6|same:password'
+            'password' => 'min:5',
+            'confirm_password' => 'min:5|same:password'
         ];
         $message = [
             'name' => 'Họ tên',
@@ -58,7 +58,7 @@ class AdminController extends Controller
 
         $this->customValidate($data, [
             'email' => 'email',
-            'password' => 'min:6'
+            'password' => 'min:5'
         ], [
             'email' => 'Email',
             'password' => 'Mật khẩu'
@@ -78,8 +78,9 @@ class AdminController extends Controller
         return redirect(route('admin.login'));
     }
 
-    function info(){
+    function info()
+    {
         $user = Auth::user();
-        return view('admin.info',compact('user'));
+        return view('admin.info', compact('user'));
     }
 }

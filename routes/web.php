@@ -19,7 +19,7 @@ Route::prefix('/')->group(function () {
     Route::post('/lien-he', [HomeController::class, 'store_contact'])->name('trangchu.luu_lienhe');
     Route::get('/tin-tuc', [HomeController::class, 'news'])->name('trangchu.tintuc');
     Route::get('/chi-tiet-tin-tuc/{id?}', [HomeController::class, 'new_detail'])->name('trangchu.tintuc.chitiet');
-    Route::get('/chi-tiet-sp/{id?}',[HomeController::class, 'product_detail'])->name('trangchu.chitietsanpham');
+    Route::get('/chi-tiet-sp/{id?}', [HomeController::class, 'product_detail'])->name('trangchu.chitietsanpham');
 
     include('client/khachhang.php');
     include('client/giohang.php');
@@ -44,4 +44,10 @@ Route::prefix('admin')->group(function () {
     include('admin/banner.php');
     // Tin tức
     include('admin/tintuc.php');
+    // Khách hàng
+    include('admin/khachhang.php');
+    // Nhân viên
+    include('admin/nhanvien.php');
+    // Đơn hàng
+    include('admin/donhang.php');
 });

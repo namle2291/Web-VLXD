@@ -13,18 +13,22 @@ class TinTucController extends Controller
         $tintuc = TinTuc::all();
         return view('admin.tintuc.danhsach', compact('tintuc'));
     }
-    function create()
+    function createOrUpdate($id = null)
     {
-        return view('admin.tintuc.them');
+        $tintuc_edit = null;
+        if($id){
+            $tintuc_edit = TinTuc::findOrFail($id);
+        }
+        return view('admin.tintuc.themsua',compact('tintuc_edit'));
     }
-    function store(Request $request)
+    function store(Request $request, $id=null)
     {
         $data = $request->all();
         unset($data['_token']);
 
         $rules = [
             'tieude' => 'required',
-            'hinhanh' => 'required',
+            'hinhanh' => $id ? '' : 'required',
             'mota' => 'required',
             'noidung' => 'required'
         ];
@@ -36,11 +40,14 @@ class TinTucController extends Controller
         ];
 
         $this->customValidate($data, $rules, $messages);
-        $data['hinhanh'] = $this->uploadFile($request->hinhanh, 'tintuc');
+
+        if($request->hinhanh){
+            $data['hinhanh'] = $this->uploadFile($request->hinhanh, 'tintuc');
+        }
 
         $data['user_id'] = Auth::user()->id;
 
-        $tintuc = TinTuc::updateOrCreate($data);
+        $tintuc = TinTuc::updateOrCreate(['id'=>$id],$data);
         $tintuc->save();
 
         return redirect(route('admin.tintuc'));

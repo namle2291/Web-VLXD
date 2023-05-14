@@ -192,7 +192,7 @@
             </div>
         </div>
         <p class="text-center py-3 m-0 coppy_right">
-            &copy; Bản quyền thuộc về Nam Lee
+            Coppy right &copy; 2023
         </p>
     </footer>
     <!-- MDB -->

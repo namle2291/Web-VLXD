@@ -104,4 +104,65 @@ class KhachHangController extends Controller
 
         return back()->with('message', 'Cập nhật thông tin thành công!');
     }
+    // Manager
+    function index()
+    {
+        $khachhang = KhachHang::orderByDesc('id')->get();
+        return view('admin.khachhang.danhsach', compact('khachhang'));
+    }
+    function createOrUpdate($id = null)
+    {
+        $khachhang_edit = null;
+        if ($id) {
+            $khachhang_edit = KhachHang::find($id);
+        }
+        return view('admin.khachhang.themsua', compact('khachhang_edit'));
+    }
+    function store(Request $request, $id = null)
+    {
+        $data = $request->all();
+        unset($data['_token']);
+
+        $rules = [
+            'ten' => 'required|min:3',
+            'email' => $id ? '' : 'required|email|unique:khach_hangs',
+            'dienthoai' => 'required',
+            'diachi' => 'required',
+            'password' => !$id ? 'required|min:6' : '',
+            'confirm_password' => !$id ? 'required|same:password' : 'same:password'
+        ];
+        $messages = [
+            'ten' => 'Họ tên',
+            'email' => 'Email',
+            'dienthoai' => 'Điện thoại',
+            'diachi' => 'Địa chỉ',
+            'password' => 'Mật khẩu',
+            'confirm_password' => 'Nhập lại mật khẩu'
+        ];
+
+        $this->customValidate($data, $rules, $messages);
+
+        if ($id) {
+            // has password
+            if ($request->password && $request->confirm_password) {
+                $data['password'] = Hash::make($data['password']);
+            } else { // null password
+                $data['password'] = KhachHang::find($id)->password;
+            }
+        } else {
+            $data['password'] = Hash::make($data['password']);
+        }
+
+        unset($data['confirm_password']);
+
+        $khachhang = KhachHang::updateOrCreate(['id' => $id], $data);
+        $khachhang->save();
+
+        return redirect(route('admin.khachhang'));
+    }
+    function delete($id = null)
+    {
+        KhachHang::destroy($id);
+        return back();
+    }
 }

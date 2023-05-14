@@ -30,8 +30,8 @@
                                 <img style="cursor: pointer;" class="rounded-circle" width="150" height="150"
                                     src="{{ asset('/storage/avatar/' . $account->anhdaidien) }}" alt="avatar" />
                             </label>
-                            <h5 class="my-3">{{$account->ten}}</h5>
-                            <p class="text-muted mb-4">{{$account->diachi}}</p>
+                            <h5 class="my-3">{{ $account->ten }}</h5>
+                            <p class="text-muted mb-4">{{ $account->diachi }}</p>
                             <div class="d-flex justify-content-center mb-2">
                                 <button type="button" class="btn btn-info btn-sm">
                                     Theo dõi

@@ -43,7 +43,7 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">Nam Le</div>
+                <div class="sidebar-brand-text mx-3">Admin</div>
             </a>
 
             <!-- Divider -->
@@ -109,6 +109,39 @@
                         <a class="collapse-item" href="{{ route('admin.tintuc') }}">Danh sách</a>
                     </div>
                 </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#khachhang"
+                    aria-expanded="true" aria-controls="khachhang">
+                    <i class="fas fa-user"></i>
+                    <span>Khách hàng</span>
+                </a>
+                <div id="khachhang" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="{{ route('admin.khachhang.them') }}">Thêm</a>
+                        <a class="collapse-item" href="{{ route('admin.khachhang') }}">Danh sách</a>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#nhanvien"
+                    aria-expanded="true" aria-controls="nhanvien">
+                    <i class="fas fa-user"></i>
+                    <span>Nhân viên</span>
+                </a>
+                <div id="nhanvien" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="{{ route('admin.nhanvien.them') }}">Thêm</a>
+                        <a class="collapse-item" href="{{ route('admin.nhanvien') }}">Danh sách</a>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{{ route('admin.donhang') }}" data-target="#donhang"
+                    aria-expanded="true" aria-controls="donhang">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span>Đơn hàng</span>
+                </a>
             </li>
         </ul>
         <!-- End of Sidebar -->
@@ -213,7 +246,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; LSN 2023</span>
+                        <span>Copyright &copy; 2023</span>
                     </div>
                 </div>
             </footer>
@@ -243,8 +276,8 @@
                 </div>
                 <div class="modal-body">Chọn "Đăng xuất" bên dưới để thoát..</div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Hủy bỏ</button>
-                    <a class="btn btn-primary" href="{{ route('admin.logout') }}">Đăng xuất</a>
+                    <button class="btn btn-secondary btn-sm" type="button" data-dismiss="modal">Hủy bỏ</button>
+                    <a class="btn btn-primary btn-sm" href="{{ route('admin.logout') }}">Đăng xuất</a>
                 </div>
             </div>
         </div>

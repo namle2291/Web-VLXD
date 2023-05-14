@@ -1,4 +1,4 @@
-<x-onlyheader>
+<x-onlyheader title="Liên hệ">
     @section('style')
         <style>
             .contact {
@@ -48,20 +48,20 @@
                             <x-error-message name="dienthoai" />
                         </div>
                     </div>
-                  </div>
-                  <div class="form-outline mb-3">
-                      <input type="text" id="email" class="form-control" siez="17" name="email" />
-                      <label class="form-label" for="email">Email</label>
-                      <x-error-message name="email" />
-                  </div>
-                  <div class="form-outline mt-3">
-                      <textarea name="noidung" class="form-control" style="background: none;" rows="3"></textarea>
-                      <label class="form-label" for="email">Nội dung</label>
-                      <x-error-message name="noidung" />
-                  </div>
+                </div>
+                <div class="form-outline mb-3">
+                    <input type="text" id="email" class="form-control" siez="17" name="email" />
+                    <label class="form-label" for="email">Email</label>
+                    <x-error-message name="email" />
+                </div>
+                <div class="form-outline mt-3">
+                    <textarea name="noidung" class="form-control" style="background: none;" rows="3"></textarea>
+                    <label class="form-label" for="email">Nội dung</label>
+                    <x-error-message name="noidung" />
+                </div>
                 <button class="btn btn-sm btn-success mt-3">Gửi</button>
             </form>
-            <x-alert message='message' color='success'/>
+            <x-alert message='message' color='success' />
         </div>
     </div>
 </x-onlyheader>

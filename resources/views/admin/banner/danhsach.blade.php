@@ -28,7 +28,7 @@
             </form>
         </div>
         <div class="col-12">
-            <table class="table">
+            <table class="table table-bordered table-hover table-striped">
                 <thead class="bg-primary text-light">
                     <tr>
                         <th>#</th>

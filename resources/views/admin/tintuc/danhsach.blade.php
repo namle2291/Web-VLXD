@@ -23,6 +23,8 @@
                         <td>{{ $item->created_at->format('H:i:s - d/m/Y') }}</td>
                         <td>{{ $item->user->name }}</td>
                         <td>
+                            <a href="{{route('trangchu.tintuc.chitiet',$item->id)}}" class="btn btn-sm btn-success">Xem</a>
+                          <a href="{{route('admin.tintuc.them',$item->id)}}" class="btn btn-sm btn-warning">Sửa</a>
                           <a href="" class="btn btn-sm btn-danger">Xóa</a>
                         </td>
                     </tr>

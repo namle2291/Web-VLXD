@@ -7,9 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class ChiTietDonHang extends Model
 {
-    use HasFactory; protected $guarded = [];
-    
-    public function donhang(){
+    use HasFactory;
+    protected $guarded = [];
+
+    public function donhang()
+    {
         return $this->hasOne(DonHang::class, 'id', 'donhang_id');
+    }
+
+    public function sanpham()
+    {
+        return $this->hasOne(SanPham::class, 'id', 'sanpham_id');
     }
 }
